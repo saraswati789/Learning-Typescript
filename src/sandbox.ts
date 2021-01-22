@@ -1,3 +1,4 @@
+console.log('test');
 let character = 'mario';
 let age = 30;
 let isBlackBelt = false;
@@ -114,3 +115,124 @@ let myninja: {name: any, age: any };
 
 myninja = {name: 'yoshi', age: 25 };
 console.log(myninja);
+
+//function
+
+let greet: Function;
+greet = () => {
+    console.log('hello, world');
+}
+
+//greet = 'hello';
+const add = (a: number, b: number, c?: number | string): void => {
+console.log(a+b);
+console.log(c);
+}
+
+add(5, 10);
+
+const minus = (a: number, b: number): number => {
+    return a+b;
+}
+
+let result = minus(10, 7);
+
+//Type aliases
+type StringOrNum = string | number;
+
+type objWithName = { name: string, uid: StringOrNum};
+
+let greetNew: (a: string, b: string) => void;
+greetNew = (name: string, greeting: string) => {
+    console.log(`$(name) says $(greeting)`);
+}
+
+let calc: (a: number, b: number, c: string) => number;
+
+calc = (numOne: number, numTwo: number, action: string) => {
+    if(action === 'add'){
+        return numOne = numTwo;
+    }
+    else{
+        return numOne - numTwo;
+    }
+}
+
+let logDetails: (obj: {name: string, age: number}) => void;
+
+type person = {name: string, age: number};
+logDetails = (ninja: {name: string, age: number}) => {
+    console.log(`$(ninja.name) is $(ninja.age) years old`);
+} 
+
+const anchor = document.querySelector('a')!;
+//if(anchor){
+//    console.log(anchor.href);
+//}
+console.log(anchor.href);
+
+//const form = document.querySelector('form');
+
+const form = document.querySelector('.new-item-form') as HTMLFormElement;
+
+console.log(form.children);
+
+//inputs
+const type = document.querySelector('#type') as HTMLFormElement;
+const tofrom = document.querySelector('#toform') as HTMLFormElement;
+const details = document.querySelector('#details') as HTMLFormElement;
+const amount = document.querySelector('#amount') as HTMLFormElement;
+
+form.addEventListener('submit', (e: Event) => {
+    e.preventDefault();
+
+    console.log(
+        type.value,
+        tofrom.value,
+        details.value,
+        amount.valueasnumber
+    );
+});
+
+//Classes
+import { Invoice } from './classes/invoice.js'
+
+const invOne = new Invoice('mario', 'work on the mario website', 250);
+const invTwo = new Invoice('luigi', 'work on the luigi website', 300);
+
+let invoices: Invoice[] = [];
+invoices.push(invOne);
+invoices.push(invTwo);
+
+//invOne.client = 'yoshi';
+
+console.log(invOne, invTwo);
+console.log(invoices);
+
+invoices.forEach(inv => {
+    console.log(inv.client, inv.amount, inv.format());
+});
+
+interface IsPerson {
+    name: string;
+    age: number;
+    speak(a: string): void;
+    spend(a: number): number;
+}
+
+const me: IsPerson = {
+    name: 'shaun',
+    age: 30,
+    speak(text: string): void {
+        console.log(text);
+    },
+    spend(amount: number): number {
+        console.log('I spent', amount);
+        return amount;
+    }
+};
+
+const greetPerson = (person: IsPerson) => {
+    console.log('hello ', person.name);
+};
+greetPerson(me);
